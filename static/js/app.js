@@ -2,29 +2,55 @@ function buildMetadata(sample) {
 
   // @TODO: Complete the following function that builds the metadata panel
 
-  // Use `d3.json` to fetch the metadata for a sample
-    // Use d3 to select the panel with id of `#sample-metadata`
+  // fetching data for sample
+  var diversity_data = `/metadata/${sample}`;
+  // selecting panel with d3 and using .html function to clear data
+  d3.json(diversity_data).then((sample) => {
+    var diversity_data2 = d3.select("#sample-metadata");
 
-    // Use `.html("") to clear any existing metadata
+    diversity_data2.html("");
 
-    // Use `Object.entries` to add each key and value pair to the panel
-    // Hint: Inside the loop, you will need to use d3 to append new
-    // tags for each key-value in the metadata.
-
-    // BONUS: Build the Gauge Chart
-    // buildGauge(data.WFREQ);
+    //`Object entries 
+    Object.entries(sample).forEach(([key, value]) => {
+      var row = diversity_data2.append("bio");
+      row.text(`${key}:${value}`)
+    })
+  });
 }
 
 function buildCharts(sample) {
+  var bio_graph = `/samples/${sample}`;
+  // Fetchig sample data for plots, building bubble chart and pie chart
+    d3.json(bio_graph).then((data) => {
+      var colonies = data.sample_values;
+      var colors = data.otu_ids;
 
-  // @TODO: Use `d3.json` to fetch the sample data for the plots
+      var frame = [{
+        x: data.otu_ids,
+        y: data.sample_values,
+        mode: "markers",
+        marker: {size: colonies, color: colors}
+      }];
 
-    // @TODO: Build a Bubble Chart using the sample data
+    var layout = {title: "Belly_Button Culture Diversity", xasis: {title: "OTU_ID" }};
 
-    // @TODO: Build a Pie Chart
-    // HINT: You will need to use slice() to grab the top 10 sample_values,
-    // otu_ids, and labels (10 each).
-}
+    Plotly.newPlot("bubble", frame, layout);
+
+    d3.jason(bio_graph).then((data) => {
+      var frame_new = {
+        values: data.sample_values.slice(0, 10),
+        lables: data.otu_ids,
+        type: "pie",
+      };
+      var data = [frame_new];
+      var layout = {
+        title: "Interactive Figure",
+      };
+
+      Plotly.newPlot("pie", data, layout);
+    });
+  });
+};
 
 function init() {
   // Grab a reference to the dropdown select element
@@ -54,3 +80,4 @@ function optionChanged(newSample) {
 
 // Initialize the dashboard
 init();
+
