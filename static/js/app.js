@@ -32,11 +32,12 @@ function buildCharts(sample) {
         marker: {size: colonies, color: colors}
       }];
 
-    var layout = {title: "Belly_Button Culture Diversity", xasis: {title: "OTU_ID" }};
+    var layout = {title: "Belly_Button Culture Diversity",
+    xasis: {title: "OTU_ID" }};
 
     Plotly.newPlot("bubble", frame, layout);
 
-    d3.jason(bio_graph).then((data) => {
+    d3.json(bio_graph).then((data) => {
       var frame_new = {
         values: data.sample_values.slice(0, 10),
         lables: data.otu_ids,
