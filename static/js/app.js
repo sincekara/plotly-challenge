@@ -12,7 +12,7 @@ function buildMetadata(sample) {
 
     //`Object entries 
     Object.entries(sample).forEach(([key, value]) => {
-      var row = diversity_data2.append("bio");
+      var row = diversity_data2.append("p");
       row.text(`${key}:${value}`)
     })
   });
@@ -33,14 +33,14 @@ function buildCharts(sample) {
       }];
 
     var layout = {title: "Belly_Button Culture Diversity",
-    xasis: {title: "OTU_ID" }};
+    xaxis: {title: "OTU_ID" }};
 
     Plotly.newPlot("bubble", frame, layout);
 
     d3.json(bio_graph).then((data) => {
       var frame_new = {
         values: data.sample_values.slice(0, 10),
-        lables: data.otu_ids,
+        labels: data.otu_ids,
         type: "pie",
       };
       var data = [frame_new];
