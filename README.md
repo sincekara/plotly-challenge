@@ -34,7 +34,7 @@ Interactive charts will be build by using Plotly.js for your the dashboard.
 
   * Use `otu_labels` for the text values.
 
-  ![](Images/graphy.PNG)
+  ![](Images/graph.PNG)
 
 * Display the sample metadata from the route `/metadata/<sample>`
 
