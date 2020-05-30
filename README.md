@@ -8,7 +8,9 @@ belly-button-biodiversity/).
 
 ## Step 1 - Plotly.js
 
-Interactive charts will be build by using Plotly.js for your the dashboard.
+![](Images/dash.PNG)
+
+Interactive charts will be built by using Plotly.js for your the dashboard.
 
 * PIE chart that uses data from your samples route 
 (`/samples/<sample>`) to display the top 10 samples.
@@ -18,8 +20,6 @@ Interactive charts will be build by using Plotly.js for your the dashboard.
   * `otu_ids` as the labels for the pie chart.
 
   * `otu_labels` as the hovertext for the chart.
-
-  ![](Images/dash.PNG)
 
 * Create a Bubble Chart that uses data from your samples route 
 (`/samples/<sample>`) to display each sample.
